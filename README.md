@@ -9,7 +9,7 @@ It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-
 if the destination is empty:
 
 ```bash
-git clone [your_origin]
+git clone [your_origin] <name>
 ```
 
 if the destination is not empty:
@@ -27,9 +27,9 @@ git checkout origin/main -b main
 remove old or current url and replace it with new url:
 
 ```bash
-git remote set-url --delete https://github.com/github_id/old/current_application_name.git
+git remote set-url --delete origin https://github.com/github_id/old/current_application_name.git
 
-git remote set-url --add https://github.com/github_id/new_application_name.git
+git remote set-url --add origin https://github.com/github_id/new_application_name.git
 
 ```
 
@@ -41,4 +41,10 @@ npm install
 yarn
 # or
 yarn install
+```
+
+yarn-upgrade-all has been added to the dev dependencies. To update all dependencies run:
+
+```bash
+yarn yarn-upgrade-all
 ```
