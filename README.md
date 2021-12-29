@@ -24,6 +24,15 @@ git fetch
 git checkout origin/main -b main
 ```
 
+remove old or current url and replace it with new url:
+
+```bash
+git remote set-url --delete https://github.com/github_id/old/current_application_name.git
+
+git remote set-url --add https://github.com/github_id/new_application_name.git
+
+```
+
 Execute with npm or with yarn to bootstrap the template and install the dependencies:
 
 ```bash
