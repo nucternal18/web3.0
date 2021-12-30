@@ -1,50 +1,46 @@
-# Next.js + Tailwind CSS + Typescript Template
+# Advanced Sample Hardhat Project
 
-This template uses [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
 
-## How to use - clone the template to your project using git
+Try running some of the following tasks:
 
-if the destination is empty:
-
-```bash
-git clone [your_origin] <name>
+```shell
+npx hardhat accounts
+npx hardhat compile
+npx hardhat clean
+npx hardhat test
+npx hardhat node
+npx hardhat help
+REPORT_GAS=true npx hardhat test
+npx hardhat coverage
+npx hardhat run scripts/deploy.ts
+TS_NODE_FILES=true npx ts-node scripts/deploy.ts
+npx eslint '**/*.{js,ts}'
+npx eslint '**/*.{js,ts}' --fix
+npx prettier '**/*.{json,sol,md}' --check
+npx prettier '**/*.{json,sol,md}' --write
+npx solhint 'contracts/**/*.sol'
+npx solhint 'contracts/**/*.sol' --fix
 ```
 
-if the destination is not empty:
+# Etherscan verification
 
-```bash
-git init
+To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
 
-git remote add origin [your_origin]
+In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
 
-git fetch
-
-git checkout origin/main -b main
+```shell
+hardhat run --network ropsten scripts/sample-script.ts
 ```
 
-remove old or current url and replace it with new url:
+Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
 
-```bash
-git remote set-url --delete origin https://github.com/github_id/old/current_application_name.git
-
-git remote set-url --add origin https://github.com/github_id/new_application_name.git
-
+```shell
+npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 ```
 
-Execute with npm or with yarn to bootstrap the template and install the dependencies:
+# Performance optimizations
 
-```bash
-npm install
-# or
-yarn
-# or
-yarn install
-```
-
-yarn-upgrade-all has been added to the dev dependencies. To update all dependencies run:
-
-```bash
-yarn yarn-upgrade-all
-```
+For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).

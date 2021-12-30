@@ -1,4 +1,10 @@
 module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    mocha: true,
+    node: true,
+  },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -6,20 +12,17 @@ module.exports = {
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:jest/recommended",
     "plugin:jest/style",
+    "plugin:testing-library/react",
     "next",
     "next/core-web-vitals",
   ],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 13,
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
@@ -39,7 +42,16 @@ module.exports = {
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@next/next/link-passhref": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "testing-library/no-render-in-setup": "off",
+    "jest/expect-expect": "off",
   },
 };
-
-// 'plugin:testing-library/react';
