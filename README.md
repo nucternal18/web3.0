@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 # Advanced Sample Hardhat Project
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
@@ -6,7 +8,7 @@ The project comes with a sample contract, a test for that contract, a sample scr
 
 Try running some of the following tasks:
 
-```shell
+````shell
 npx hardhat accounts
 npx hardhat compile
 npx hardhat clean
@@ -23,6 +25,30 @@ npx prettier '**/*.{json,sol,md}' --check
 npx prettier '**/*.{json,sol,md}' --write
 npx solhint 'contracts/**/*.sol'
 npx solhint 'contracts/**/*.sol' --fix
+=======
+# Next.js + Tailwind CSS + Typescript Template
+
+This template uses [Tailwind CSS](https://tailwindcss.com/) [(v3)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+
+## How to use - clone the template to your project using git
+
+if the destination is empty:
+
+```bash
+git clone [your_origin] <name>
+````
+
+if the destination is not empty:
+
+```bash
+git init
+
+git remote add origin [your_origin]
+
+git fetch
+
+git checkout origin/main -b main
+>>>>>>> 1ec56a515ab15f2980899246174c2ae31c5c8036
 ```
 
 # Etherscan verification
