@@ -3,6 +3,8 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import { Loader } from "./";
+import { useTransaction } from "../context/TransactionContext";
+import { toast } from "react-toastify";
 
 const commonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -18,10 +20,26 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
   />
 );
 function Welcome() {
-  const [isLoading, setIsLoading] = useState(false);
-  const connectWallet = () => {};
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const [formData, setFormData] = useState({
+    addressTo: "",
+    amount: "",
+    keyword: "",
+    message: "",
+  });
+  const { state, connectWallet, sendTransaction } = useTransaction();
+
+  const handleChange = (e, name) => {
+    setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
+  };
+  const handleSubmit = (e) => {
+    const { addressTo, amount, keyword, message } = formData;
+    e.preventDefault();
+    if (!addressTo || !amount || !keyword || !message) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+    sendTransaction(formData);
+  };
   return (
     <div className="flex w-full justify-center items-center">
       <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
@@ -32,13 +50,17 @@ function Welcome() {
           <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
             Explore the crypto world. Buy and sell crypto easily
           </p>
-          <button
-            type="button"
-            onClick={connectWallet}
-            className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd"
-          >
-            <p className="text-white text-base font-semibold">Connect Wallet</p>
-          </button>
+          {!state.currentAccount && (
+            <button
+              type="button"
+              onClick={connectWallet}
+              className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd"
+            >
+              <p className="text-white text-base font-semibold">
+                Connect Wallet
+              </p>
+            </button>
+          )}
           <div className="grid sm:grid-cols-3 grid-cols-2 gap-0 w-full mt-10">
             <div className={`rounded-tl-2xl ${commonStyles}`}>Reliability</div>
             <div className={`rounded-tr-2xl sm:rounded-none ${commonStyles}`}>
@@ -72,46 +94,47 @@ function Welcome() {
             </div>
           </div>
           <div className="p-5 sm:w-96 w-ful flex flex-col items-center blue-glassmorphism">
-            <Input
-              placeholder="Address to"
-              name="addressTo"
-              type="text"
-              value=""
-              handleChange={handleChange}
-            />
-            <Input
-              placeholder="Amount (ETH)"
-              name="amount"
-              type="number"
-              value=""
-              handleChange={handleChange}
-            />
-            <Input
-              placeholder="Keyword (GIF)"
-              name="keyword"
-              type="text"
-              value=""
-              handleChange={handleChange}
-            />
-            <Input
-              placeholder="Enter Message"
-              name="message"
-              type="text"
-              value=""
-              handleChange={handleChange}
-            />
-            <div className="h-[1px] w-full bg-gray-400 my-2" />
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer"
-              >
-                Send Now
-              </button>
-            )}
+            <form onSubmit={handleSubmit}>
+              <Input
+                placeholder="Address to"
+                name="addressTo"
+                type="text"
+                value={formData.addressTo}
+                handleChange={handleChange}
+              />
+              <Input
+                placeholder="Amount (ETH)"
+                name="amount"
+                type="number"
+                value={formData.amount}
+                handleChange={handleChange}
+              />
+              <Input
+                placeholder="Keyword (GIF)"
+                name="keyword"
+                type="text"
+                value={formData.keyword}
+                handleChange={handleChange}
+              />
+              <Input
+                placeholder="Enter Message"
+                name="message"
+                type="text"
+                value={formData.message}
+                handleChange={handleChange}
+              />
+              <div className="h-[1px] w-full bg-gray-400 my-2" />
+              {state.loading ? (
+                <Loader />
+              ) : (
+                <button
+                  type="submit"
+                  className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer"
+                >
+                  Send Now
+                </button>
+              )}
+            </form>
           </div>
         </div>
       </div>
