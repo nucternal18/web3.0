@@ -5,6 +5,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { Loader } from "./";
 import { useTransaction } from "../context/TransactionContext";
 import { toast } from "react-toastify";
+import { shortenAddress } from "../utils/shortenAddress";
 
 const commonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -22,7 +23,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 function Welcome() {
   const [formData, setFormData] = useState({
     addressTo: "",
-    amount: "",
+    amount: 0,
     keyword: "",
     message: "",
   });
@@ -86,7 +87,9 @@ function Welcome() {
                 <BsInfoCircle fontSize={17} color="#fff" />
               </div>
               <div>
-                <p className="text-white font-light text-sm">Address</p>
+                <p className="text-white font-light text-sm">
+                  {shortenAddress(state.currentAccount)}
+                </p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
                 </p>

@@ -23,7 +23,6 @@ export type TransferStructStruct = {
   amount: BigNumberish;
   message: string;
   timestamp: BigNumberish;
-  account: string;
   keyword: string;
 };
 
@@ -33,7 +32,6 @@ export type TransferStructStructOutput = [
   BigNumber,
   string,
   BigNumber,
-  string,
   string
 ] & {
   sender: string;
@@ -41,7 +39,6 @@ export type TransferStructStructOutput = [
   amount: BigNumber;
   message: string;
   timestamp: BigNumber;
-  account: string;
   keyword: string;
 };
 
@@ -49,7 +46,7 @@ export interface TransactionsInterface extends utils.Interface {
   functions: {
     "getAllTransactions()": FunctionFragment;
     "getTransactionCount()": FunctionFragment;
-    "transfer(address,uint256,string,string,string)": FunctionFragment;
+    "transfer(address,uint256,string,string)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -62,7 +59,7 @@ export interface TransactionsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transfer",
-    values: [string, BigNumberish, string, string, string]
+    values: [string, BigNumberish, string, string]
   ): string;
 
   decodeFunctionResult(
@@ -76,21 +73,20 @@ export interface TransactionsInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
 
   events: {
-    "Transfer(address,address,uint256,string,uint256,string,string)": EventFragment;
+    "Transfer(address,address,uint256,string,uint256,string)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export type TransferEvent = TypedEvent<
-  [string, string, BigNumber, string, BigNumber, string, string],
+  [string, string, BigNumber, string, BigNumber, string],
   {
     from: string;
     receiver: string;
     amount: BigNumber;
     message: string;
     timestamp: BigNumber;
-    account: string;
     keyword: string;
   }
 >;
@@ -134,7 +130,6 @@ export interface Transactions extends BaseContract {
       receiver: string,
       amount: BigNumberish,
       message: string,
-      account: string,
       keyword: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -150,7 +145,6 @@ export interface Transactions extends BaseContract {
     receiver: string,
     amount: BigNumberish,
     message: string,
-    account: string,
     keyword: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -166,20 +160,18 @@ export interface Transactions extends BaseContract {
       receiver: string,
       amount: BigNumberish,
       message: string,
-      account: string,
       keyword: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
-    "Transfer(address,address,uint256,string,uint256,string,string)"(
+    "Transfer(address,address,uint256,string,uint256,string)"(
       from?: null,
       receiver?: null,
       amount?: null,
       message?: null,
       timestamp?: null,
-      account?: null,
       keyword?: null
     ): TransferEventFilter;
     Transfer(
@@ -188,7 +180,6 @@ export interface Transactions extends BaseContract {
       amount?: null,
       message?: null,
       timestamp?: null,
-      account?: null,
       keyword?: null
     ): TransferEventFilter;
   };
@@ -202,7 +193,6 @@ export interface Transactions extends BaseContract {
       receiver: string,
       amount: BigNumberish,
       message: string,
-      account: string,
       keyword: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -221,7 +211,6 @@ export interface Transactions extends BaseContract {
       receiver: string,
       amount: BigNumberish,
       message: string,
-      account: string,
       keyword: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

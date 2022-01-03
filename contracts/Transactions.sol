@@ -10,7 +10,6 @@ contract Transactions {
         uint256 amount,
         string message,
         uint256 timestamp,
-        string account,
         string keyword
     );
 
@@ -20,7 +19,6 @@ contract Transactions {
         uint256 amount;
         string message;
         uint256 timestamp;
-        string account;
         string keyword;
     }
 
@@ -30,7 +28,6 @@ contract Transactions {
         address payable receiver,
         uint256 amount,
         string memory message,
-        string memory account,
         string memory keyword
     ) public {
         transactionCount += 1;
@@ -41,7 +38,6 @@ contract Transactions {
                 amount,
                 message,
                 block.timestamp,
-                account,
                 keyword
             )
         );
@@ -52,7 +48,6 @@ contract Transactions {
             amount,
             message,
             block.timestamp,
-            account,
             keyword
         );
 
